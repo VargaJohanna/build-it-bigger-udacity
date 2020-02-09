@@ -1,8 +1,12 @@
 package com.udacity.gradle.builditbigger;
 
+import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.util.Pair;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -55,7 +59,8 @@ public class MainActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(jokeIntent);
+                new EndpointsAsyncTask().execute(new Pair<Context, String>(MainActivity.this, "Test"));
+//                startActivity(jokeIntent);
             }
         });
     }
