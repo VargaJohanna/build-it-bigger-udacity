@@ -1,24 +1,20 @@
 package com.udacity.gradle.builditbigger;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.util.Pair;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
+import android.widget.ProgressBar;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.jokelibrary.JokeActivity;
-import com.android.joker.Joker;
 
-import static com.android.jokelibrary.JokeActivity.JOKE_EXTRA;
-
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements OnTaskCompleted {
+    ProgressBar progressBar = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Button jokeButton = findViewById(R.id.btn_joke);
+        progressBar = findViewById(R.id.progressBar);
         tellJoke(jokeButton);
     }
 
@@ -53,17 +50,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void tellJoke(Button button) {
-//        Toast.makeText(this, Joker.getJoke(), Toast.LENGTH_LONG).show();
-        final Intent jokeIntent = new Intent(this, JokeActivity.class);
-        jokeIntent.putExtra(JOKE_EXTRA, Joker.getJoke());
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new EndpointsAsyncTask().execute(new Pair<Context, String>(MainActivity.this, "Test"));
-//                startActivity(jokeIntent);
+                progressBar.setVisibility(View.VISIBLE);
+                new EndpointsAsyncTask(MainActivity.this).execute(MainActivity.this);
             }
         });
     }
 
-
+    @Override
+    public void onTaskCompleted() {
+        progressBar.setVisibility(View.GONE);
+        startActivity(new Intent(this, JokeActivity.class));
+    }
 }
