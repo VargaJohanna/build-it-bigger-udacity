@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity implements OnTaskCompleted {
             @Override
             public void onClick(View view) {
                 progressBar.setVisibility(View.VISIBLE);
-                new EndpointsAsyncTask(MainActivity.this).execute(MainActivity.this);
+                new EndpointsAsyncTask(MainActivity.this).execute();
             }
         });
     }

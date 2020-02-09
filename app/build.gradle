@@ -12,7 +12,7 @@ buildscript {
 
 android {
     compileSdkVersion 29
-    buildToolsVersion "26.0.3"
+    buildToolsVersion "28.0.3"
 
     defaultConfig {
         applicationId "com.udacity.gradle.builditbigger"
@@ -21,7 +21,6 @@ android {
         versionCode 1
         versionName "1.0"
         multiDexEnabled true
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -31,6 +30,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    sourceSets { main { java.srcDirs = ['src/main/java', 'src/test/java/'] } }
 }
 
 dependencies {
@@ -44,9 +44,9 @@ dependencies {
     implementation project(':joker')
     implementation project(':jokelibrary')
 
-    androidTestImplementation('androidx.test.espresso:espresso-core:3.1.0', {
+    implementation "androidx.test.ext:junit:1.1.1"
+    implementation('androidx.test.espresso:espresso-core:3.1.0', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-
     testImplementation 'junit:junit:4.12'
 }

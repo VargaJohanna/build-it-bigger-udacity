@@ -15,7 +15,6 @@ import static com.android.jokelibrary.JokeActivity.jokeToDisplay;
 
 public class EndpointsAsyncTask extends AsyncTask<Context, Void, String> {
     private static MyApi myApiService = null;
-    private Context context;
     private OnTaskCompleted listener;
 
     EndpointsAsyncTask(OnTaskCompleted listener){
@@ -41,8 +40,6 @@ public class EndpointsAsyncTask extends AsyncTask<Context, Void, String> {
 
             myApiService = builder.build();
         }
-
-        context = params[0];
 
         try {
             return myApiService.sayJoke().execute().getData();
