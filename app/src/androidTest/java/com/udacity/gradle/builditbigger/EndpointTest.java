@@ -11,7 +11,7 @@ import static org.junit.Assert.assertFalse;
 public class EndpointTest {
 
     @Test
-    public void tellJoke() throws InterruptedException {
+    public void endpointAsyncTaskShouldReturnJoke() throws InterruptedException {
         final CountDownLatch signal = new CountDownLatch(1);
 
         new EndpointsAsyncTask(new OnTaskCompleted() {
@@ -21,6 +21,7 @@ public class EndpointTest {
             }
         }).execute();
 
+        // Add this wait to ensure that the AsyncTask has finished.
         signal.await();
 
         assertFalse(JokeActivity.jokeToDisplay.isEmpty());
