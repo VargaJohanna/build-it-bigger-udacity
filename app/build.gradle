@@ -31,6 +31,18 @@ android {
         }
     }
     sourceSets { main { java.srcDirs = ['src/main/java', 'src/test/java/'] } }
+
+    flavorDimensions "version"
+    productFlavors {
+        free {
+            applicationId "com.udacity.gradle.builditbigger.free"
+            dimension "version"
+        }
+        paid {
+            applicationId "com.udacity.gradle.builditbigger.paid"
+            dimension "version"
+        }
+    }
 }
 
 dependencies {
