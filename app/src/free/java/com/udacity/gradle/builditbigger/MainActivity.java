@@ -27,18 +27,16 @@ public class MainActivity extends AppCompatActivity implements OnTaskCompleted {
 
         Button jokeButton = findViewById(R.id.btn_joke);
         progressBar = findViewById(R.id.progressBar);
-        if(getResources().getBoolean(R.bool.showAd)) {
-            mInterstitialAd = new InterstitialAd(this);
-            mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
-            mInterstitialAd.loadAd(new AdRequest.Builder().build());
-            mInterstitialAd.setAdListener(new AdListener() {
-                @Override
-                public void onAdClosed() {
-                    startAsyncTask();
-                }
+        mInterstitialAd = new InterstitialAd(this);
+        mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+        mInterstitialAd.setAdListener(new AdListener() {
+            @Override
+            public void onAdClosed() {
+                startAsyncTask();
+            }
 
-            });
-        }
+        });
         tellJoke(jokeButton);
     }
 
